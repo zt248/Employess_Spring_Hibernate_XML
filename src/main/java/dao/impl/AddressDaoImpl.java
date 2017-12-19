@@ -8,14 +8,13 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import util.SessionUtil;
 
 import java.util.List;
 
 
 @Repository
 @Transactional
-public class AddressDaoImpl extends SessionUtil implements AddressDAO {
+public class AddressDaoImpl implements AddressDAO {
 
     @Autowired
     private SessionFactory sessionFactory;

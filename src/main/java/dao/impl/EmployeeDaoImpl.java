@@ -8,15 +8,12 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import util.SessionUtil;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
 @Transactional
-public class EmployeeDaoImpl extends SessionUtil implements EmployeeDAO {
+public class EmployeeDaoImpl implements EmployeeDAO {
 
 
     @Autowired
