@@ -5,10 +5,7 @@ import model.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import service.AddressService;
 
@@ -48,6 +45,7 @@ public class AddressController {
         return new ModelAndView("views/address/newAddress", "command", new Address());
     }
 
+
     @RequestMapping(value = "/address/addAddress", method = RequestMethod.POST)
     public String addAddress(@ModelAttribute("address") Address address, Model model) throws DaoException {
         model.addAttribute("country", address.getCountry());
@@ -57,6 +55,16 @@ public class AddressController {
         this.addressService.add(address);
         return "redirect:/address/getListAddress";
     }
+
+
+    /*добавление с помощью Ajax*/
+    @RequestMapping(value = "/address/addSt-ajax", method = RequestMethod.POST)
+    @ResponseBody
+    public String addAddressAjax(Address address) throws DaoException {
+        addressService.add(address);
+        return address.toString();
+    }
+
 
     //Редактирование записи
     @RequestMapping(value = "/address/updateAddress", method = RequestMethod.GET)
