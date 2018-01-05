@@ -6,9 +6,13 @@ import model.Address;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.Query;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 
@@ -68,8 +72,19 @@ public class AddressDaoImpl implements AddressDAO {
 
         Session session = this.sessionFactory.getCurrentSession();
         session.remove(address);
-
-
     }
+
+
+    public List<Address> getEmployeesByPage(int pageid,int total){
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery("From Address ");
+//        query.setFirstResult(0);
+//        query.setMaxResults(10);
+        query.setFirstResult(pageid);
+        query.setMaxResults(total);
+        List<Address> addressList = query.getResultList();
+        return addressList;
+    }
+
 
 }

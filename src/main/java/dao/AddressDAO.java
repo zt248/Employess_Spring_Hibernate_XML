@@ -23,4 +23,6 @@ public interface AddressDAO {
     //detele
     void remove(Address address) throws DaoException;
 
+    public List<Address> getEmployeesByPage(int pageid,int total);
+
 }

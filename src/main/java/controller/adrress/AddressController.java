@@ -1,20 +1,26 @@
 package controller.adrress;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import dao.DaoException;
 import model.Address;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import service.AddressService;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+
 @Controller
 public class AddressController {
 
     @Autowired
     private AddressService addressService;
-    
+
 //Чтение записей
 
     @RequestMapping(value = "/address/getListAddress", method = RequestMethod.GET)
@@ -22,6 +28,13 @@ public class AddressController {
         model.addAttribute("listAddress", this.addressService.getAll());
         return "views/address/addressListDisplay";
     }
+
+//    @RequestMapping(value = "/address/getListAddressAjax", method = RequestMethod.GET)
+//    @ResponseBody
+//    public String listAddressAjax() throws Exception {
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        return objectMapper.writeValueAsString(addressService.getAll());
+//    }
 
 
     @RequestMapping(value = "/address/byIdAddress", method = RequestMethod.GET)
@@ -60,9 +73,10 @@ public class AddressController {
     /*добавление с помощью Ajax*/
     @RequestMapping(value = "/address/addSt-ajax", method = RequestMethod.POST)
     @ResponseBody
-    public String addAddressAjax(Address address) throws DaoException {
+    public String addAddressAjax(HttpServletRequest request, Address address) throws DaoException {
         addressService.add(address);
-        return address.toString();
+//        return address.toString();
+        return "redirect:/address/getListAddress";
     }
 
 

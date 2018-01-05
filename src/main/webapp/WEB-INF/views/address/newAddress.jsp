@@ -9,8 +9,7 @@
 <body>
 
 
-<%--<form:form method="post" id="addressForm" action="/address/addAddress" enctype="multipart/form-data">--%>
-<form:form method="post" id="addressForm" action="/address/addSt-ajax" enctype="multipart/form-data">
+<form:form method="post" id="addressForm" action="/address/addSt-ajax">
     <table>
         <tr>
             <td><form:label path="Country">Country</form:label></td>
@@ -38,23 +37,23 @@
 </form:form>
 
 
-
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"/>
+<%--<script src="https://code.jquery.com/jquery-3.1.1.min.js"/>--%>
 
 <script>
-    var form = document.getElementById('addressForm');
     var url = <c:url value="/address/addSt-ajax"/>
-        form.onsubmit = function () {
-            var formData = new FormData(form)
+    var addressForm = document.getElementById("addressForm");
+        addressForm.onsubmit = function (ev) {
+            ev.preventDefault();
             var xhr = new XMLHttpRequest();
-            // xhr.open('POST', form.getAttribute('action'), false);
             xhr.open('POST', url, false);
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            var formData = new FormData(document.getElementById("addressForm"))
             xhr.send(formData);
+            console.log(xhr.response)
             return false; // To avoid actual submission of the form
         }
 </script>
-
+<%--<script src="">--%>
 
 </body>
 </html>

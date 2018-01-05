@@ -26,6 +26,20 @@
 
 </table>
 
+<script>
+    var url = <c:url value="/address/addSt-ajax"/>
+    var addressForm = document.getElementById("addressForm");
+    addressForm.onsubmit = function (ev) {
+        ev.preventDefault();
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', url, false);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        var formData = new FormData(document.getElementById("addressForm"))
+        xhr.send(formData);
+        console.log(xhr.response)
+        return false; // To avoid actual submission of the form
+    }
+</script>
 
 </body>
 </html>
