@@ -21,11 +21,9 @@
 </html>
 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js">
-
 </script>
-<script src="http://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js">
-
-</script>
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.0/css/jquery.dataTables.css">
+<script type="text/javascript" src="//cdn.datatables.net/1.10.0/js/jquery.dataTables.js"></script>
 
 <script type="text/javascript">
 
@@ -39,7 +37,10 @@
                 {"mData": "city"},
                 {"mData": "street"},
                 {"mData": "postCode"}
-            ]
+            ],
+            "paging":true,
+            "pageLength":4,
+            "ordering":true
         });
     });
 </script>
